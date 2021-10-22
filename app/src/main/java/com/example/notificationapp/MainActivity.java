@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
         //PendingIntent pendingIntent = new
 
         Notification notification = new NotificationCompat.Builder(this,App.CHANNEL_1_ID).
-                setSmallIcon(R.drawable.one)
+                // icon is the only mandatory field
+                setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setColor(Color.BLUE)
+             //   .setColor(Color.BLUE)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .build();
+
 
         // id stands for showing multiple notifications
         // at the same time

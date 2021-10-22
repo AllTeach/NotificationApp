@@ -2,6 +2,7 @@ package com.example.notificationapp;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.graphics.Color;
 import android.os.Build;
 
 public class App extends android.app.Application{
@@ -25,9 +26,12 @@ public class App extends android.app.Application{
                     "channel 1",
                     NotificationManager.IMPORTANCE_HIGH);
             // create the settings as default user can change
-            // user can see in the settigs
-
+            // user can see in the settings
             channel1.setDescription(" Channel 1 user for...");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+
             NotificationChannel channel2 = new NotificationChannel(CHANNEL_2_ID,
                     "channel 2",
                     NotificationManager.IMPORTANCE_LOW);
@@ -36,9 +40,6 @@ public class App extends android.app.Application{
 
             channel2.setDescription(" Channel 2 user for...");
 
-            NotificationManager manager = getSystemService(NotificationManager.class);
-
-            manager.createNotificationChannel(channel1);
             manager.createNotificationChannel(channel2);
 
         }
