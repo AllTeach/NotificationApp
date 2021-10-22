@@ -39,20 +39,28 @@ public class MainActivity extends AppCompatActivity {
         String title = etTitle.getText().toString();
         String message = etMessage.getText().toString();
 
-        Intent intent = new Intent(this,MainActivity.class);
-        //PendingIntent pendingIntent = new
-
+        // create pending intent to start activity
+        Intent notifyIntent = new Intent(this,SecondActivity.class);
+        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                  | Intent.FLAG_ACTIVITY_CLEAR_TASK
+              //  | Intent.FLAG_ACTIVITY_TASK_ON_HOME
+                //| Intent.FLAG_ACTIVITY_CLEAR_TOP
+        );
+        // Create the PendingIntent
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        );
         Notification notification = new NotificationCompat.Builder(this,App.CHANNEL_1_ID).
                 // icon is the only mandatory field
                 setSmallIcon(R.drawable.ic_stat_name)
                 .setContentTitle(title)
                 .setContentText(message)
-             //   .setColor(Color.BLUE)
+                .setColor(Color.BLUE)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
+                //add the pending intent to notification builder
+                .setContentIntent(notifyPendingIntent)
                 .build();
-
-
-        // id stands for showing multiple notifications
+        // Notification id stands for showing multiple notifications
         // at the same time
         // if we use the same ID it will override the
         // existing notification
